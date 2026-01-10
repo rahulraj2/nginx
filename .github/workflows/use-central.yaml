@@ -1,0 +1,14 @@
+name: Use Central Workflow
+
+on:
+  push:
+    branches:
+      - Development
+      - Release
+
+jobs:
+  call-central:
+    uses: rahulraj2/github-actions-library/.github/workflows/central-workflow.yml@main
+    with:
+      environment: ${{ github.ref_name == 'Development' && 'Dev' || 'UAT' }}
+      branch: ${{ github.ref_name }}
